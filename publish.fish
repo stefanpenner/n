@@ -21,7 +21,7 @@ for FILE in docs/*.md
 end
 
 cd tmp/n
-git add .
-git commit -m "update"
-git push origin gh-pages:gh-pages
+  git add .
+  git commit -m "update"
+  git push origin gh-pages:gh-pages
 cd -
