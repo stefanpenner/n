@@ -16,8 +16,8 @@ cd -
 
 set -x PATH ./node_modules/.bin/ $PATH
 
-for FILE in *.md
-  nomdown < $FILE > tmp/n/$FILE
+for FILE in docs/*.md
+  nomdown < $FILE > tmp/$FILE
 end
 
 cd tmp/n
