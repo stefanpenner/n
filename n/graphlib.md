@@ -1,4 +1,4 @@
-# Reinvestment > Reinventing (pt.1)
+# OSS Reinvestment > Reinventing (pt.1)
 
 I've found myself writing custom adhoc graph helpers/functions/libs for various
 projects, but really that doesn't make much sense. Rather then reinventing the
