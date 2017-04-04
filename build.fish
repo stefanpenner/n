@@ -5,9 +5,11 @@ if test -d tmp/n
   cd tmp/n
   git fetch
   git clean -fdx
-  git reset --hard origin/master
+  git checkout gh-pages
+  git reset --hard origin/gh-pages
 else
   git clone git@github.com:stefanpenner/n.git tmp/n/
+  git checkout gh-pages
   cd tmp/n
 end
 cd -
@@ -21,5 +23,5 @@ end
 cd tmp/n
 git add .
 git commit -m "update"
-git push origin master
+git push origin gh-pages:gh-pages
 cd -
