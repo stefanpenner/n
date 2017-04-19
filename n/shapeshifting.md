@@ -1,4 +1,4 @@
-# Accidental ShapeShifting
+# ShapeShifting
 
 Ember recently transitioned to using WeakMaps (when available) to store its
 `meta`. This meta is used for book keeping, such as is a given object dirty,
