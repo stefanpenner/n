@@ -26,22 +26,21 @@ Today in v8 when an object is used as a key in a collection (`Set`, `Map`,
 `WeakMap`, `WeakSet`) the object still must add a property to that object to
 store a unique identifier and doing so causes the objects shape to change.
 
-Example:
+### Given:
+```js
+// index.js
+let set = new WeakSet();
+let obj = { };
+print('-- set.add(obj) --');
+set.add(foo);
+```
+
+### Example:
 
 ```sh
 d8_debug --trace-maps index.js
 ```
 *note: d8_debug is an alias to `path/to/v8/out/x64.debug/d8` which was built via `make native debug` on v8@26bc590629*
-
-```js
-// index.js
-{
-  let set = new WeakSet();
-  let obj = { };
-  print('-- set.add(obj) --');
-  set.add(foo);
-}
-```
 
 Output
 ```sh
