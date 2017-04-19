@@ -1,0 +1,82 @@
+<h1 id="shapeshifting">ShapeShifting</h1>
+<p>Ember recently transitioned to using WeakMaps (when available) to store its
+<code>meta</code>. This meta is used for book keeping, such as is a given object dirty,
+who is watching a given object, and a location to store other cached
+information about an object.</p>
+<p>Our hope was by moving to WeakMaps we could:</p>
+<ol>
+<li>no longer polute objects with <code>__ember_meta__</code> property</li>
+<li>avoid costly <code>Object.defineProperty</code> for non-enumerability</li>
+<li>avoid &quot;Shape Changes&quot; associated with adding an additional property to all
+tracked objects.</li>
+<li>Improve Performance</li>
+</ol>
+<p>As it turns out 1, 2 have been nicely addressed. Unfortuantely performance
+isn&#39;t much improved, and it seems in some scenarios it may be actualy somewhat
+negative. The <a href="https://github.com/eviltrout/ember-performance/tree/master/benchmarks/render-complex-list">complex list
+benchmark</a>
+suggests that as much as 5% of time is spent just in WeakMap land.</p>
+<p>After Speaking with <a href="https://twitter.com/bmeurer">@bmeurer</a>, he shared that the
+V8 team has also seen this, and they have several ideas:</p>
+<p>Today in v8 when an object is used as a key in a collection (<code>Set</code>, <code>Map</code>,
+<code>WeakMap</code>, <code>WeakSet</code>) the object still must add a property to that object to
+store a unique identifier and doing so causes the objects shape to change.</p>
+<h3 id="given-">Given:</h3>
+<pre><code class="lang-js"><span class="hljs-comment">// index.js</span>
+<span class="hljs-keyword">let</span> <span class="hljs-keyword">set</span> = <span class="hljs-keyword">new</span> WeakSet();
+<span class="hljs-keyword">let</span> obj = { };
+print(<span class="hljs-string">'-- set.add(obj) --'</span>);
+<span class="hljs-keyword">set</span>.<span class="hljs-keyword">add</span>(foo);
+</code></pre>
+<h3 id="example-">Example:</h3>
+<pre><code class="lang-sh">d8_debug <span class="hljs-comment">--trace-maps index.js</span>
+</code></pre>
+<p><em>note: d8_debug is an alias to <code>path/to/v8/out/x64.debug/d8</code> which was built via <code>make native debug</code> on v8@26bc590629</em></p>
+<p>Output</p>
+<pre><code class="lang-sh">-- <span class="hljs-keyword">set</span>.<span class="hljs-built_in">add</span>(obj) --
+[TraceMap<span class="hljs-variable">s:</span> Transition from= <span class="hljs-number">0</span>x3460b3c032d9 <span class="hljs-keyword">to</span>= <span class="hljs-number">0</span>x3460b3c0f569 name= <span class="hljs-symbol">&lt;hash_code_symbol&gt;</span> ]
+</code></pre>
+<p>What we are seeing is <code>obj</code> recieving a new property <code>&lt;has-code-symbol&gt;</code>, which
+transitions <code>obj</code> into a new shape. Now code &quot;optimized&quot; to work with the old
+<code>shape</code> of object will be invalid, and require recompile if used with the new shaped <code>ojb</code>.</p>
+<p><code>&lt;has_code_symbol&gt;</code> is the property which contains the hash code used for
+Map/Set/WeakSet/WeakMap identity, and it set here:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">function</span> GetHash(key) {
+  var <span class="hljs-built_in">hash</span> = GetExistingHash(key);
+  <span class="hljs-keyword">if</span> (IS_UNDEFINED(<span class="hljs-built_in">hash</span>)) {
+    <span class="hljs-built_in">hash</span> = (MathRandom() * 0x40000000) | 0;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">hash</span> === 0) <span class="hljs-built_in">hash</span> = 1;
+    SET_PRIVATE(key, <span class="hljs-built_in">hash</span>CodeSymbol, <span class="hljs-built_in">hash</span>); // &lt;-- adds a property to key (our object)
+  }
+  <span class="hljs-built_in">return</span> <span class="hljs-built_in">hash</span>;
+}
+%SetForceInlineFlag(GetHash);
+</code></pre>
+<p>codez in v8:</p>
+<ol>
+<li><a href="https://github.com/v8/v8/blob/master/src/js/weak-collection.js#L57">https://github.com/v8/v8/blob/master/src/js/weak-collection.js#L57</a></li>
+<li><a href="https://github.com/v8/v8/blob/9e5a064197ca3db0ff39bcc04767494ead4aa929/src/js/collection.js#L89">https://github.com/v8/v8/blob/9e5a064197ca3db0ff39bcc04767494ead4aa929/src/js/collection.js#L89</a></li>
+<li><a href="https://github.com/v8/v8/blob/9e5a064197ca3db0ff39bcc04767494ead4aa929/src/js/collection.js#L107">https://github.com/v8/v8/blob/9e5a064197ca3db0ff39bcc04767494ead4aa929/src/js/collection.js#L107</a></li>
+<li><a href="https://github.com/v8/v8/blob/9e5a064197ca3db0ff39bcc04767494ead4aa929/src/js/collection.js#L112">https://github.com/v8/v8/blob/9e5a064197ca3db0ff39bcc04767494ead4aa929/src/js/collection.js#L112</a> &lt;-- mutates</li>
+</ol>
+<p>Although objects all do have a unique <code>pointer</code>, the pointer itself
+may change do to the garbage collector moving things around.</p>
+<p>My first thought was, what if all objects already had a private <code>hash</code>
+property. Unfortunately I was informed this would result in unwanted memory
+waste, as this property and value are typically unused.</p>
+<p>Instead, the idea being proposed is more creative. Today, all objects have the following layout:</p>
+<pre><code>// TODO
+<span class="hljs-keyword">type</span>
+<span class="hljs-type">properties </span>&lt;<span class="hljs-comment">-- inlined properties/values</span>
+elements &lt;<span class="hljs-comment">-- either empty, or a pointer to a position backing store</span>
+</code></pre><p>Given that the <code>elements</code> pointer is often unused, it can serve as the <code>hash</code>
+value. If it is used as a pointer, the first position in the <code>elements</code> storage
+would be that <code>hash</code> value.</p>
+<p>This would illiminate the shape changed associated with using an object as a
+key in a collection such as <code>Map</code> <code>Set</code> <code>WeakMap</code> <code>WeakSet</code>, all while minizing
+memory overhead.</p>
+<ul>
+<li>Issue in v8: link</li>
+<li>Credit to the V8 team (especially <a href="https://twitter.com/bmeurer">@bmeurer</a>) for
+sharing insights into V8, and continuing to work on V8 performance.</li>
+</ul>
