@@ -17,7 +17,7 @@ As it turns out 1, 2 have been nicely addressed. Unfortuantely performance
 isn't much improved, and it seems in some scenarios it may be actualy somewhat
 negative. The [complex list
 benchmark](https://github.com/eviltrout/ember-performance/tree/master/benchmarks/render-complex-list)
-suggests that as much as 5% of time is spent just in WeakMap land.
+suggests that atleast 5% of time is spent just in WeakMap land.
 
 After Speaking with [@bmeurer](https://twitter.com/bmeurer), he shared that the
 V8 team has also seen this, and they have several ideas:
@@ -85,18 +85,49 @@ waste, as this property and value are typically unused.
 
 Instead, the idea being proposed is more creative. Today, all objects have the following layout:
 
+```nomnoml
+[<frame>Object|
+  type|
+  properties |
+  elements
+]
 ```
-// TODO
-type
-properties <-- inlined properties/values
-elements <-- either empty, or a pointer to a position backing store
-```
+
 
 Given that the `elements` pointer is often unused, it can serve as the `hash`
 value. If it is used as a pointer, the first position in the `elements` storage
 would be that `hash` value.
 
-This would illiminate the shape changed associated with using an object as a
+```nomnoml
+[<frame>Object|
+  type|
+  properties |
+  elements = hash_code
+]
+```
+
+If `elements` is used, the first entry in `elements` will become the `<hash_code_symbol>`
+
+```nomnoml
+[<frame>Object|
+  type|
+  properties |
+  elements
+]
+
+
+[Object] ---> [Elements]
+
+[Elements ||
+  hash_code|
+  field 2|
+  field 3|
+  ...
+  field n
+]
+```
+
+This would eliminate  the shape changed associated with using an object as a
 key in a collection such as `Map` `Set` `WeakMap` `WeakSet`, all while minizing
 memory overhead.
 
