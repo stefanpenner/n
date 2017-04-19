@@ -2,6 +2,81 @@
 # yarn lockfile v1
 
 
+async-disk-cache@^1.0.0:
+  version "1.2.3"
+  resolved "https://registry.npmjs.org/async-disk-cache/-/async-disk-cache-1.2.3.tgz#dd6278f8a6727459d8064bf63c6619bc9dc3c1ec"
+  dependencies:
+    debug "^2.1.3"
+    heimdalljs "^0.2.3"
+    istextorbinary "2.1.0"
+    mkdirp "^0.5.0"
+    rimraf "^2.5.3"
+    rsvp "^3.0.18"
+
+balanced-match@^0.4.1:
+  version "0.4.2"
+  resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
+
+"binaryextensions@1 || 2":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/binaryextensions/-/binaryextensions-2.0.0.tgz#e597d1a7a6a3558a2d1c7241a16c99965e6aa40f"
+
+blank-object@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/blank-object/-/blank-object-1.0.2.tgz#f990793fbe9a8c8dd013fb3219420bec81d5f4b9"
+
+brace-expansion@^1.0.0:
+  version "1.1.6"
+  resolved "https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.6.tgz#7197d7eaa9b87e648390ea61fc66c84427420df9"
+  dependencies:
+    balanced-match "^0.4.1"
+    concat-map "0.0.1"
+
+broccoli-kitchen-sink-helpers@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/broccoli-kitchen-sink-helpers/-/broccoli-kitchen-sink-helpers-0.3.1.tgz#77c7c18194b9664163ec4fcee2793444926e0c06"
+  dependencies:
+    glob "^5.0.10"
+    mkdirp "^0.5.1"
+
+broccoli-nomdown@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/broccoli-nomdown/-/broccoli-nomdown-1.0.1.tgz#a107a24e30ae0a605252aaa2190d68a5b6fcd1de"
+  dependencies:
+    broccoli-persistent-filter "^1.2.13"
+    nomdown "^1.0.6"
+
+broccoli-persistent-filter@^1.2.13:
+  version "1.2.13"
+  resolved "https://registry.npmjs.org/broccoli-persistent-filter/-/broccoli-persistent-filter-1.2.13.tgz#61368669e2b8f35238fdd38a2a896597e4a1c821"
+  dependencies:
+    async-disk-cache "^1.0.0"
+    blank-object "^1.0.1"
+    broccoli-plugin "^1.0.0"
+    fs-tree-diff "^0.5.2"
+    hash-for-dep "^1.0.2"
+    heimdalljs "^0.2.1"
+    heimdalljs-logger "^0.1.7"
+    md5-hex "^1.0.2"
+    mkdirp "^0.5.1"
+    promise-map-series "^0.2.1"
+    rsvp "^3.0.18"
+    symlink-or-copy "^1.0.1"
+    walk-sync "^0.3.1"
+
+broccoli-plugin@^1.0.0:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/broccoli-plugin/-/broccoli-plugin-1.3.0.tgz#bee704a8e42da08cb58e513aaa436efb7f0ef1ee"
+  dependencies:
+    promise-map-series "^0.2.1"
+    quick-temp "^0.1.3"
+    rimraf "^2.3.4"
+    symlink-or-copy "^1.1.8"
+
+concat-map@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
+
 cp-data@1.1.3:
   version "1.1.3"
   resolved "https://registry.npmjs.org/cp-data/-/cp-data-1.1.3.tgz#b705f637992db68f37e2d48de525b1d66dd5b372"
@@ -13,15 +88,108 @@ dagre@0.4.x:
     cp-data "1.1.3"
     graphlib "0.7.4"
 
+debug@^2.1.3, debug@^2.2.0:
+  version "2.6.3"
+  resolved "https://registry.npmjs.org/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
+  dependencies:
+    ms "0.7.2"
+
+editions@^1.1.1:
+  version "1.3.3"
+  resolved "https://registry.npmjs.org/editions/-/editions-1.3.3.tgz#0907101bdda20fac3cbe334c27cbd0688dc99a5b"
+
+ember-cli-inject-live-reload@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.npmjs.org/ember-cli-inject-live-reload/-/ember-cli-inject-live-reload-1.6.1.tgz#82b8f5be454815a75e7f6d42c9ce0bc883a914a3"
+
+ensure-posix-path@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/ensure-posix-path/-/ensure-posix-path-1.0.2.tgz#a65b3e42d0b71cfc585eb774f9943c8d9b91b0c2"
+
+fs-tree-diff@^0.5.2:
+  version "0.5.6"
+  resolved "https://registry.npmjs.org/fs-tree-diff/-/fs-tree-diff-0.5.6.tgz#342665749e8dca406800b672268c8f5073f3e623"
+  dependencies:
+    heimdalljs-logger "^0.1.7"
+    object-assign "^4.1.0"
+    path-posix "^1.0.0"
+    symlink-or-copy "^1.1.8"
+
+fs.realpath@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
+
+glob@^5.0.10:
+  version "5.0.15"
+  resolved "https://registry.npmjs.org/glob/-/glob-5.0.15.tgz#1bc936b9e02f4a603fcc222ecf7633d30b8b93b1"
+  dependencies:
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "2 || 3"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
+glob@^7.0.5:
+  version "7.1.1"
+  resolved "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.2"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
 graphlib@0.7.4:
   version "0.7.4"
   resolved "https://registry.npmjs.org/graphlib/-/graphlib-0.7.4.tgz#41027ea381c3db06bb0c1b0be936d732859edda7"
   dependencies:
     cp-data "1.1.3"
 
+hash-for-dep@^1.0.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/hash-for-dep/-/hash-for-dep-1.1.2.tgz#e3347ed92960eb0bb53a2c6c2b70e36d75b7cd0c"
+  dependencies:
+    broccoli-kitchen-sink-helpers "^0.3.1"
+    heimdalljs "^0.2.3"
+    heimdalljs-logger "^0.1.7"
+    resolve "^1.1.6"
+
+heimdalljs-logger@^0.1.7:
+  version "0.1.8"
+  resolved "https://registry.npmjs.org/heimdalljs-logger/-/heimdalljs-logger-0.1.8.tgz#82abb55e53eefc0e5654ddf521b82926e50fcd95"
+  dependencies:
+    debug "^2.2.0"
+    heimdalljs "^0.2.0"
+
+heimdalljs@^0.2.0, heimdalljs@^0.2.1, heimdalljs@^0.2.3:
+  version "0.2.4"
+  resolved "https://registry.npmjs.org/heimdalljs/-/heimdalljs-0.2.4.tgz#34ead16eab422c94803065d33abeba1f7b24a910"
+  dependencies:
+    rsvp "~3.2.1"
+
 highlight.js@^9.10.0:
   version "9.10.0"
   resolved "https://registry.npmjs.org/highlight.js/-/highlight.js-9.10.0.tgz#f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55"
+
+inflight@^1.0.4:
+  version "1.0.6"
+  resolved "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
+  dependencies:
+    once "^1.3.0"
+    wrappy "1"
+
+inherits@2:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
+
+istextorbinary@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/istextorbinary/-/istextorbinary-2.1.0.tgz#dbed2a6f51be2f7475b68f89465811141b758874"
+  dependencies:
+    binaryextensions "1 || 2"
+    editions "^1.1.1"
+    textextensions "1 || 2"
 
 lodash@~3.7.0:
   version "3.7.0"
@@ -31,6 +199,46 @@ marked@^0.3.6:
   version "0.3.6"
   resolved "https://registry.npmjs.org/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
+matcher-collection@^1.0.0:
+  version "1.0.4"
+  resolved "https://registry.npmjs.org/matcher-collection/-/matcher-collection-1.0.4.tgz#2f66ae0869996f29e43d0b62c83dd1d43e581755"
+  dependencies:
+    minimatch "^3.0.2"
+
+md5-hex@^1.0.2:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/md5-hex/-/md5-hex-1.3.0.tgz#d2c4afe983c4370662179b8cad145219135046c4"
+  dependencies:
+    md5-o-matic "^0.1.1"
+
+md5-o-matic@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/md5-o-matic/-/md5-o-matic-0.1.1.tgz#822bccd65e117c514fab176b25945d54100a03c3"
+
+"minimatch@2 || 3", minimatch@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.0.3.tgz#2a4e4090b96b2db06a9d7df01055a62a77c9b774"
+  dependencies:
+    brace-expansion "^1.0.0"
+
+minimist@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
+
+mkdirp@^0.5.0, mkdirp@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
+  dependencies:
+    minimist "0.0.8"
+
+mktemp@~0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmjs.org/mktemp/-/mktemp-0.4.0.tgz#6d0515611c8a8c84e484aa2000129b98e981ff0b"
+
+ms@0.7.2:
+  version "0.7.2"
+  resolved "https://registry.npmjs.org/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
+
 nomdown@^1.0.6:
   version "1.0.6"
   resolved "https://registry.npmjs.org/nomdown/-/nomdown-1.0.6.tgz#0d439f8ab420f8f2c79d3cf03556b91bf69543c4"
@@ -39,9 +247,99 @@ nomdown@^1.0.6:
     marked "^0.3.6"
     nomnoml stefanpenner/nomnoml#sized-svg
 
-"nomnoml@github:stefanpenner/nomnoml#sized-svg":
+nomnoml@stefanpenner/nomnoml#sized-svg:
   version "0.1.0"
   resolved "https://codeload.github.com/stefanpenner/nomnoml/tar.gz/946f66ffff88b9f5178c11dee1cb6d69363264d3"
   dependencies:
     dagre "0.4.x"
     lodash "~3.7.0"
+
+object-assign@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+
+once@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.npmjs.org/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
+  dependencies:
+    wrappy "1"
+
+path-is-absolute@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
+
+path-parse@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+
+path-posix@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/path-posix/-/path-posix-1.0.0.tgz#06b26113f56beab042545a23bfa88003ccac260f"
+
+promise-map-series@^0.2.1:
+  version "0.2.3"
+  resolved "https://registry.npmjs.org/promise-map-series/-/promise-map-series-0.2.3.tgz#c2d377afc93253f6bd03dbb77755eb88ab20a847"
+  dependencies:
+    rsvp "^3.0.14"
+
+quick-temp@^0.1.3:
+  version "0.1.8"
+  resolved "https://registry.npmjs.org/quick-temp/-/quick-temp-0.1.8.tgz#bab02a242ab8fb0dd758a3c9776b32f9a5d94408"
+  dependencies:
+    mktemp "~0.4.0"
+    rimraf "^2.5.4"
+    underscore.string "~3.3.4"
+
+resolve@^1.1.6:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/resolve/-/resolve-1.3.2.tgz#1f0442c9e0cbb8136e87b9305f932f46c7f28235"
+  dependencies:
+    path-parse "^1.0.5"
+
+rimraf@^2.3.4, rimraf@^2.5.3, rimraf@^2.5.4:
+  version "2.6.1"
+  resolved "https://registry.npmjs.org/rimraf/-/rimraf-2.6.1.tgz#c2338ec643df7a1b7fe5c54fa86f57428a55f33d"
+  dependencies:
+    glob "^7.0.5"
+
+rsvp@^3.0.14, rsvp@^3.0.18:
+  version "3.5.0"
+  resolved "https://registry.npmjs.org/rsvp/-/rsvp-3.5.0.tgz#a62c573a4ae4e1dfd0697ebc6242e79c681eaa34"
+
+rsvp@~3.2.1:
+  version "3.2.1"
+  resolved "https://registry.npmjs.org/rsvp/-/rsvp-3.2.1.tgz#07cb4a5df25add9e826ebc67dcc9fd89db27d84a"
+
+sprintf-js@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+
+symlink-or-copy@^1.0.1, symlink-or-copy@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.npmjs.org/symlink-or-copy/-/symlink-or-copy-1.1.8.tgz#cabe61e0010c1c023c173b25ee5108b37f4b4aa3"
+
+"textextensions@1 || 2":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/textextensions/-/textextensions-2.0.1.tgz#be8cf22d65379c151319f88f0335ad8f667abdca"
+
+underscore.string@~3.3.4:
+  version "3.3.4"
+  resolved "https://registry.npmjs.org/underscore.string/-/underscore.string-3.3.4.tgz#2c2a3f9f83e64762fdc45e6ceac65142864213db"
+  dependencies:
+    sprintf-js "^1.0.3"
+    util-deprecate "^1.0.2"
+
+util-deprecate@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
+
+walk-sync@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/walk-sync/-/walk-sync-0.3.1.tgz#558a16aeac8c0db59c028b73c66f397684ece465"
+  dependencies:
+    ensure-posix-path "^1.0.0"
+    matcher-collection "^1.0.0"
+
+wrappy@1:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"

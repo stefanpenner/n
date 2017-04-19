@@ -14,11 +14,14 @@ else
 end
 cd -
 
-set -x PATH ./node_modules/.bin/ $PATH
+ember build
 
-for FILE in docs/*.md
-  nomdown < $FILE > tmp/$FILE
+for FIlE in tmp/n/**/*
+  echo "rm $FILE"
+  git rm $FILE
 end
+
+cp -r dist/ tmp/n
 
 cd tmp/n
   git add .

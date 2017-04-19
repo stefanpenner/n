@@ -9,6 +9,8 @@
     "nomdown": "nomdown"
   },
   "dependencies": {
+    "broccoli-nomdown": "^1.0.1",
+    "ember-cli-inject-live-reload": "^1.6.1",
     "nomdown": "^1.0.6"
   }
 }
