@@ -1,0 +1,16 @@
+<h1 id="set-performance">Set Performance</h1>
+<p>Set&#39;s are a populate data structure, often used when for checking if an entity
+is a member of some set.</p>
+<pre><code class="lang-js">let club = <span class="hljs-keyword">new</span> Set();
+
+club.has(<span class="hljs-symbol">'stef</span>'); // =&gt; <span class="hljs-literal">false</span>, stef isn<span class="hljs-symbol">'t</span> <span class="hljs-keyword">in</span> the club!
+
+club.add(<span class="hljs-symbol">'stef</span>');
+club.has(<span class="hljs-symbol">'stef</span>'); // =&gt; <span class="hljs-literal">true</span>, stef <span class="hljs-keyword">is</span> now <span class="hljs-keyword">in</span> the club!
+
+club.delete(<span class="hljs-symbol">'stef</span>');
+club.has(<span class="hljs-symbol">'stef</span>'); // =&gt; <span class="hljs-literal">true</span>, stef <span class="hljs-keyword">is</span> no longer <span class="hljs-keyword">in</span> the club!
+</code></pre>
+<p>Although a wide range of operations are possible <a href="https://en.wikipedia.org/wiki/Set_theory">As you set theory fans are
+likely aware of</a>, I&#39;ll just be
+focusing on the most basic operations <code>has</code> <code>add</code> <code>delete</code></p>
