@@ -50,11 +50,11 @@ Output
 
 What we are seeing is `obj` recieving a new property `<has-code-symbol>`, which
 transitions `obj` into a new shape. Now code "optimized" to work with the old
-`shape` of object will be invalid, and require recompile if used with the new shaped `ojb`.
+`shape` of object will be invalid, and require recompile if used with the new shaped `obj`.
 
 
 `<has_code_symbol>` is the property which contains the hash code used for
-Map/Set/WeakSet/WeakMap identity, and it set here:
+Map/Set/WeakSet/WeakMap identity, and is set here in v8:
 
 ```js
 function GetHash(key) {
@@ -93,7 +93,6 @@ Instead, the idea being proposed is more creative. Today, all objects have the f
 ]
 ```
 
-
 Given that the `elements` pointer is often unused, it can serve as the `hash`
 value. If it is used as a pointer, the first position in the `elements` storage
 would be that `hash` value.
@@ -131,7 +130,7 @@ This would eliminate  the shape changed associated with using an object as a
 key in a collection such as `Map` `Set` `WeakMap` `WeakSet`, all while minizing
 memory overhead.
 
-* Issue in v8: link
+* Issue in v8: thttps://bugs.chromium.org/p/v8/issues/detail?id=6404
 * Credit to the V8 team (especially [@bmeurer](https://twitter.com/bmeurer)) for
 sharing insights into V8, and continuing to work on V8 performance.
 
